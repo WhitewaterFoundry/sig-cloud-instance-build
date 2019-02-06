@@ -1,13 +1,16 @@
-# This is a kickstart designed for docker.
+# This is a minimal rhel kickstart designed for docker.
 # It will not produce a bootable system
 # To use this kickstart, run the following command
 # livemedia-creator --make-tar \
 #   --iso=/path/to/boot.iso  \
 #   --ks=rhel-7.ks \
-#   --image-name=rootfs.tar.xz
+#   --image-name=rhel-root.tar.xz
 #
+# Once the image has been generated, it can be imported into docker
+# by using: cat rhel-root.tar.xz | docker import -i imagename
 
 # Basic setup information
+url --url=""
 install
 keyboard us
 rootpw --lock --iscrypted locked
@@ -26,12 +29,13 @@ part / --size 3000 --fstype ext4
 
 # Package setup
 %packages --excludedocs --instLangs=en --nocore
+redhat-release
+subscription-manager
 bind-utils
 bash
 yum
+sudo
 vim-minimal
-redhat-release
-subscription-manager
 less
 -kernel*
 -*firmware
@@ -95,7 +99,6 @@ awk '(NF==0&&!done){print "override_install_langs=en_US.utf8\ntsflags=nodocs";do
 mv /etc/yum.conf.new /etc/yum.conf
 echo 'container' > /etc/yum/vars/infra
 
-
 ##Setup locale properly
 # Commenting out, as this seems to no longer be needed
 #rm -f /usr/lib/locale/locale-archive
@@ -118,9 +121,7 @@ systemd-tmpfiles --create --boot
 # Make sure login works
 rm /var/run/nologin
 
-
 #Generate installtime file record
 /bin/date +%Y%m%d_%H%M > /etc/BUILDTIME
-
 
 %end
