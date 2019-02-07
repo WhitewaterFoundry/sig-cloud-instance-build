@@ -33,7 +33,6 @@ yum-utils
 -kernel
 -kexec-tools
 -xfsprogs
-
 %end
 
 %pre
