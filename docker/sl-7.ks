@@ -1,14 +1,3 @@
-# This is a minimal SL kickstart designed for docker.
-# It will not produce a bootable system
-# To use this kickstart, run the following command
-# livemedia-creator --make-tar \
-#   --iso=/path/to/boot.iso  \
-#   --ks=sl-7.ks \
-#   --image-name=sl-root.tar.xz
-#
-# Once the image has been generated, it can be imported into docker
-# by using: cat sl-root.tar.xz | docker import -i imagename
-
 # Basic setup information
 url --url="http://ftp.scientificlinux.org/linux/scientific/7x/x86_64/os/"
 install
@@ -24,7 +13,6 @@ lang en_US
 
 # Repositories to use
 repo --name="SL" --baseurl=http://ftp.scientificlinux.org/linux/scientific/7x/x86_64/os/ --cost=100
-## Uncomment for rolling builds
 repo --name="SL Updates" --baseurl=http://ftp.scientificlinux.org/linux/scientific/7x/x86_64/updates/ --cost=100
 
 # Disk setup
@@ -63,7 +51,6 @@ yum-plugin-ovl
 %end
 
 %pre
-# Pre configure tasks for Docker
 
 # Don't add the anaconda build logs to the image
 # see /usr/share/anaconda/post-scripts/99-copy-logs.ks
@@ -71,7 +58,6 @@ touch /tmp/NOSAVE_LOGS
 %end
 
 %post --log=/anaconda-post.log
-# Post configure tasks for Docker
 
 # remove stuff we don't need that anaconda insists on
 # kernel needs to be removed by rpm, because of grubby
@@ -103,7 +89,6 @@ awk '(NF==0&&!done){print "override_install_langs=en_US.utf8\ntsflags=nodocs";do
 mv /etc/yum.conf.new /etc/yum.conf
 echo 'container' > /etc/yum/vars/infra
 
-
 ##Setup locale properly
 # Commenting out, as this seems to no longer be needed
 #rm -f /usr/lib/locale/locale-archive
@@ -126,9 +111,7 @@ systemd-tmpfiles --create --boot
 # Make sure login works
 rm /var/run/nologin
 
-
 #Generate installtime file record
 /bin/date +%Y%m%d_%H%M > /etc/BUILDTIME
-
 
 %end
