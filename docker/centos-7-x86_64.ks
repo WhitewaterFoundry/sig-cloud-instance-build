@@ -37,6 +37,7 @@ part / --size 3000 --fstype ext4
 bind-utils
 bash
 yum
+sudo
 vim-minimal
 centos-release
 less
