@@ -38,6 +38,9 @@ bind-utils
 bash
 yum
 sudo
+unzip
+openssh
+openssh-clients
 vim-minimal
 centos-release
 less
