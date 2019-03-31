@@ -26,6 +26,7 @@ bind-utils
 bash
 yum
 sudo
+openssh-clients
 vim-minimal
 centos-release
 less
