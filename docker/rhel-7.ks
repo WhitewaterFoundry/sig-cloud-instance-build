@@ -50,14 +50,7 @@ touch /tmp/NOSAVE_LOGS
 %post --log=/anaconda-post.log
 
 rpm -e kernel
-yum -y remove bind-libs bind-libs-lite dhclient dhcp-common dhcp-libs \
-  dracut-network e2fsprogs e2fsprogs-libs ebtables ethtool file \
-  firewalld freetype gettext gettext-libs groff-base grub2 grub2-tools \
-  grubby initscripts iproute iptables kexec-tools libcroco libgomp \
-  libmnl libnetfilter_conntrack libnfnetlink libselinux-python lzo \
-  libunistring os-prober python-decorator python-slip python-slip-dbus \
-  snappy sysvinit-tools which linux-firmware GeoIP firewalld-filesystem \
-  qemu-guest-agent
+yum -y remove linux-firmware qemu-guest-agent
 yum clean all
 
 #clean up unused directories
