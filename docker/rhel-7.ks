@@ -1,4 +1,5 @@
-url --url=""
+# Basic setup information
+url --url="http://rhel.whitewaterfoundry.com/rhel-7-workstation-rpms/"
 install
 keyboard us
 rootpw --lock --iscrypted locked
@@ -10,10 +11,15 @@ shutdown
 bootloader --disable
 lang en_US
 
+# Repositories to use
+repo --name="rhel-7-workstation-rpms" --baseurl=http://rhel.whitewaterfoundry.com/rhel-7-workstation-rpms/ --cost=100
+repo --name="rhel-7-optional-rpms" --baseurl=http://rhel.whitewaterfoundry.com/rhel-7-workstation-optional-rpms/ --cost=100
+repo --name="rhel-7-extra-rpms" --baseurl=http://rhel.whitewaterfoundry.com/rhel-7-workstation-extra-rpms/ --cost=100
+
 # Disk setup
 zerombr
 clearpart --all --initlabel
-part / --size 3000 --fstype ext4
+part / --size 1500 --fstype ext4
 
 %packages --excludedocs --nobase --nocore --instLangs=en
 bind-utils
