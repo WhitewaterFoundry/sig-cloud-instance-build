@@ -1,5 +1,5 @@
 # Basic setup information
-url --url="http://rhel.whitewaterfoundry.com/rhel-7-workstation-rpms/"
+url --url=""
 install
 keyboard us
 rootpw --lock --iscrypted locked
