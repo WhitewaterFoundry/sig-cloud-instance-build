@@ -33,7 +33,7 @@ clearpart --all --initlabel
 part / --size 3000 --fstype ext4
 
 # Package setup
-%packages --excludedocs --instLangs=en --nocore
+%packages --instLangs=en --nocore
 bind-utils
 bash
 yum
@@ -62,6 +62,8 @@ tar
 passwd
 yum-utils
 yum-plugin-ovl
+man
+man-pages
 
 %end
 
