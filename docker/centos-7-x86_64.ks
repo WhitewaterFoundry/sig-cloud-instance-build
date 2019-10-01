@@ -101,9 +101,10 @@ passwd -l root
 #LANG="en_US"
 #echo "%_install_lang $LANG" > /etc/rpm/macros.image-language-conf
 
-awk '(NF==0&&!done){print "override_install_langs=en_US.utf8\ntsflags=nodocs";done=1}{print}' \
-    < /etc/yum.conf > /etc/yum.conf.new
-mv /etc/yum.conf.new /etc/yum.conf
+#awk '(NF==0&&!done){print "override_install_langs=en_US.utf8\ntsflags=nodocs";done=1}{print}' \
+#    < /etc/yum.conf > /etc/yum.conf.new
+# mv /etc/yum.conf.new /etc/yum.conf
+
 echo 'container' > /etc/yum/vars/infra
 
 
