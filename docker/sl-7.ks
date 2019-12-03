@@ -75,7 +75,7 @@ yum -y remove bind-libs bind-libs-lite dhclient dhcp-common dhcp-libs \
   grubby initscripts iproute iptables kexec-tools libcroco libgomp \
   libmnl libnetfilter_conntrack libnfnetlink libselinux-python lzo \
   libunistring os-prober python-decorator python-slip python-slip-dbus \
-  snappy sysvinit-tools which linux-firmware GeoIP firewalld-filesystem \
+  snappy sysvinit-tools linux-firmware GeoIP firewalld-filesystem \
   qemu-guest-agent
 
 yum clean all
