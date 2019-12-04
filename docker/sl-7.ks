@@ -21,13 +21,13 @@ clearpart --all --initlabel
 part / --size 3000 --fstype ext4
 
 # Package setup
-%packages --excludedocs --instLangs=en --nocore
+%packages --instLangs=en --nocore
 bind-utils
 bash
 yum
 sudo
 openssh-clients
-vim-minimal
+vim
 centos-release
 less
 -kernel*
@@ -48,6 +48,11 @@ tar
 passwd
 yum-utils
 yum-plugin-ovl
+man-pages 
+man-db 
+man
+bash-completion
+wget
 
 %end
 
@@ -66,11 +71,11 @@ rpm -e kernel
 
 yum -y remove bind-libs bind-libs-lite dhclient dhcp-common dhcp-libs \
   dracut-network e2fsprogs e2fsprogs-libs ebtables ethtool file \
-  firewalld freetype gettext gettext-libs groff-base grub2 grub2-tools \
+  firewalld freetype gettext gettext-libs grub2 grub2-tools \
   grubby initscripts iproute iptables kexec-tools libcroco libgomp \
   libmnl libnetfilter_conntrack libnfnetlink libselinux-python lzo \
   libunistring os-prober python-decorator python-slip python-slip-dbus \
-  snappy sysvinit-tools which linux-firmware GeoIP firewalld-filesystem \
+  snappy sysvinit-tools linux-firmware GeoIP firewalld-filesystem \
   qemu-guest-agent
 
 yum clean all
@@ -85,7 +90,7 @@ passwd -l root
 #LANG="en_US"
 #echo "%_install_lang $LANG" > /etc/rpm/macros.image-language-conf
 
-awk '(NF==0&&!done){print "override_install_langs=en_US.utf8\ntsflags=nodocs";done=1}{print}' \
+awk '(NF==0&&!done){print "override_install_langs=en_US.utf8";done=1}{print}' \
     < /etc/yum.conf > /etc/yum.conf.new
 mv /etc/yum.conf.new /etc/yum.conf
 echo 'container' > /etc/yum/vars/infra
@@ -111,6 +116,20 @@ umount /run
 systemd-tmpfiles --create --boot
 # Make sure login works
 rm /var/run/nologin
+
+# Some shell tweaks
+echo "source /etc/vimrc" > /etc/skel/.vimrc
+echo "set background=dark" >> /etc/skel/.vimrc
+echo "set visualbell" >> /etc/skel/.vimrc
+echo "set noerrorbells" >> /etc/skel/.vimrc
+
+echo "\$include /etc/inputrc" > /etc/skel/.inputrc
+echo "set bell-style none" >> /etc/skel/.inputrc
+echo "set show-all-if-ambiguous on" >> /etc/skel/.inputrc
+echo "set show-all-if-unmodified on" >> /etc/skel/.inputrc
+
+#Fix ping
+chmod u+s /usr/bin/ping
 
 #Generate installtime file record
 /bin/date +%Y%m%d_%H%M > /etc/BUILDTIME
