@@ -16,11 +16,12 @@ zerombr
 clearpart --all --initlabel
 part / --size 1500 --fstype ext4
 
-%packages --excludedocs --nobase --nocore --instLangs=en
+# Package setup
+%packages --nobase --nocore --instLangs=en
 bind-utils
 bash
 yum
-vim-minimal
+vim
 subscription-manager
 less
 -kernel*
@@ -41,6 +42,12 @@ tar
 passwd
 yum-utils
 yum-plugin-ovl
+man-pages
+man-db
+man
+bash-completion
+wget
+
 %end
 
 %pre
@@ -75,6 +82,20 @@ rm -rf /usr/lib/udev/hwdb.d/*
 umount /run
 systemd-tmpfiles --create --boot
 rm /var/run/nologin
+
+# Some shell tweaks
+echo "source /etc/vimrc" > /etc/skel/.vimrc
+echo "set background=dark" >> /etc/skel/.vimrc
+echo "set visualbell" >> /etc/skel/.vimrc
+echo "set noerrorbells" >> /etc/skel/.vimrc
+
+echo "\$include /etc/inputrc" > /etc/skel/.inputrc
+echo "set bell-style none" >> /etc/skel/.inputrc
+echo "set show-all-if-ambiguous on" >> /etc/skel/.inputrc
+echo "set show-all-if-unmodified on" >> /etc/skel/.inputrc
+
+#Fix ping
+chmod u+s /usr/bin/ping
 
 #Generate installtime file record
 /bin/date +%Y%m%d_%H%M > /etc/BUILDTIME
