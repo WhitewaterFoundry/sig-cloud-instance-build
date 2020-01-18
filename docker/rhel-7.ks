@@ -1,6 +1,6 @@
 # Basic setup information
-url --url=""
 install
+cdrom
 keyboard us
 rootpw --lock --iscrypted locked
 timezone --isUtc --nontp UTC
