@@ -21,6 +21,8 @@ part / --size 1500 --fstype ext4
 bind-utils
 bash
 yum
+sudo
+openssh-clients
 vim
 subscription-manager
 less
@@ -47,16 +49,20 @@ man-db
 man
 bash-completion
 wget
-sudo
 
 %end
 
 %pre
+
+# Don't add the anaconda build logs to the image
+# see /usr/share/anaconda/post-scripts/99-copy-logs.ks
 touch /tmp/NOSAVE_LOGS
 %end
 
 %post --log=/anaconda-post.log
 
+# remove stuff we don't need that anaconda insists on
+# kernel needs to be removed by rpm, because of grubby
 rpm -e kernel
 yum -y remove linux-firmware qemu-guest-agent
 yum clean all
@@ -75,13 +81,17 @@ echo "%_install_lang $LANG" > /etc/rpm/macros.image-language-conf
 rm -rf /var/cache/yum/x86_64
 rm -f /tmp/ks-script*
 rm -rf /etc/sysconfig/network-scripts/ifcfg-*
+# do we really need a hardware database in a container?
 rm -rf /etc/udev/hwdb.bin
 rm -rf /usr/lib/udev/hwdb.d/*
 
 ## Systemd fixes
+# no machine-id by default.
 :> /etc/machine-id
+# Fix /run/lock breakage since it's not tmpfs in docker
 umount /run
 systemd-tmpfiles --create --boot
+# Make sure login works
 rm /var/run/nologin
 
 # Some shell tweaks
