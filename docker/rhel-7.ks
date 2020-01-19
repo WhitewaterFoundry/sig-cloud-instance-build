@@ -47,6 +47,7 @@ man-db
 man
 bash-completion
 wget
+sudo
 
 %end
 
