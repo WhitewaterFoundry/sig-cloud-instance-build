@@ -48,11 +48,13 @@ tar
 passwd
 yum-utils
 yum-plugin-ovl
+yum-plugin-versionlock
 man-pages
 man-db
 man
 bash-completion
 wget
+deltarpm
 
 %end
 

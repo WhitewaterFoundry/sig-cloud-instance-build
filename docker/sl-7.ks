@@ -48,11 +48,13 @@ tar
 passwd
 yum-utils
 yum-plugin-ovl
+yum-plugin-versionlock
 man-pages
 man-db
 man
 bash-completion
 wget
+deltarpm
 
 %end
 
@@ -64,6 +66,10 @@ touch /tmp/NOSAVE_LOGS
 %end
 
 %post --log=/anaconda-post.log
+
+#Add WSLU
+yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
+yum -y install wslu
 
 # remove stuff we don't need that anaconda insists on
 # kernel needs to be removed by rpm, because of grubby
