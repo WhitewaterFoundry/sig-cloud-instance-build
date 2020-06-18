@@ -55,6 +55,7 @@ man
 bash-completion
 wget
 deltarpm
+dos2unix
 
 %end
 
