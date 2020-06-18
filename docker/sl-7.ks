@@ -68,10 +68,6 @@ touch /tmp/NOSAVE_LOGS
 
 %post --log=/anaconda-post.log
 
-#Add WSLU
-yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
-yum -y install wslu
-
 # remove stuff we don't need that anaconda insists on
 # kernel needs to be removed by rpm, because of grubby
 rpm -e kernel
@@ -84,6 +80,10 @@ yum -y remove bind-libs bind-libs-lite dhclient dhcp-common dhcp-libs \
   libunistring os-prober python-decorator python-slip python-slip-dbus \
   snappy sysvinit-tools linux-firmware GeoIP firewalld-filesystem \
   qemu-guest-agent
+
+#Add WSLU
+yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
+yum -y install wslu
 
 yum clean all
 
