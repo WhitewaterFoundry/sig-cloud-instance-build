@@ -84,7 +84,6 @@ yum -y remove bind-libs bind-libs-lite dhclient dhcp-common dhcp-libs \
 #Add WSLU
 yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
 yum -y update
-yum -y install wslu
 
 yum clean all
 
