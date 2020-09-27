@@ -49,6 +49,8 @@ man-db
 man
 bash-completion
 wget
+deltarpm
+dos2unix
 
 %end
 
@@ -65,6 +67,11 @@ touch /tmp/NOSAVE_LOGS
 # kernel needs to be removed by rpm, because of grubby
 rpm -e kernel
 yum -y remove linux-firmware qemu-guest-agent
+
+#Add WSLU
+yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
+yum -y update
+
 yum clean all
 
 #clean up unused directories
@@ -107,6 +114,9 @@ echo "set show-all-if-unmodified on" >> /etc/skel/.inputrc
 
 #Fix ping
 chmod u+s /usr/bin/ping
+
+#Upgrade to the latest
+yum -y upgrade
 
 #Generate installtime file record
 /bin/date +%Y%m%d_%H%M > /etc/BUILDTIME
