@@ -43,13 +43,11 @@ rootfiles
 tar
 passwd
 yum-utils
-yum-plugin-ovl
 man-pages
 man-db
 man
 bash-completion
 wget
-deltarpm
 dos2unix
 
 %end
