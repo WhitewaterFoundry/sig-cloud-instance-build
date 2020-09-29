@@ -17,7 +17,7 @@ clearpart --all --initlabel
 part / --size 1500 --fstype ext4
 
 # Package setup
-%packages --nobase --nocore --instLangs=en
+%packages --nocore --instLangs=en
 bind-utils
 bash
 yum
@@ -49,6 +49,8 @@ man-db
 man
 bash-completion
 wget
+deltarpm
+dos2unix
 
 %end
 
