@@ -16,6 +16,16 @@ zerombr
 clearpart --all --initlabel
 part / --size 1500 --fstype ext4
 
+#-*firmware
+#-firewalld-filesystem
+#-os-prober
+#-gettext*
+#-GeoIP
+#-bind-license
+#-freetype
+#-libteam
+#-teamd
+
 # Package setup
 %packages --nocore --instLangs=en
 bind-utils
@@ -26,19 +36,10 @@ openssh-clients
 vim
 subscription-manager
 less
--*firmware
--firewalld-filesystem
--os-prober
--gettext*
--GeoIP
--bind-license
--freetype
 iputils
 iproute
 systemd
 rootfiles
--libteam
--teamd
 tar
 passwd
 yum-utils
