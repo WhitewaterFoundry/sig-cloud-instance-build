@@ -26,7 +26,6 @@ openssh-clients
 vim
 subscription-manager
 less
--kernel*
 -*firmware
 -firewalld-filesystem
 -os-prober
