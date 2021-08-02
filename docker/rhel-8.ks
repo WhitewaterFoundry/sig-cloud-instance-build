@@ -9,12 +9,12 @@ firewall --disabled
 network --bootproto=dhcp --device=link --activate --onboot=on
 shutdown
 bootloader --disable
-lang en_US
+lang en_US.UTF-8
 
 # Disk setup
 zerombr
 clearpart --all --initlabel
-part / --size 1500 --fstype ext4
+autopart --fstype=ext4 --type=plain --nohome --noboot --noswap
 
 #-*firmware
 #-firewalld-filesystem
@@ -28,28 +28,34 @@ part / --size 1500 --fstype ext4
 
 # Package setup
 %packages --nocore --instLangs=en
-bind-utils
+@^minimal-environment
 bash
-yum
-sudo
-openssh-clients
-vim
-subscription-manager
-less
-iputils
-iproute
-systemd
-rootfiles
-tar
-passwd
-yum-utils
-man-pages
-man-db
-man
 bash-completion
-wget
+bind-utils
+curl
+dnf
 dos2unix
-
+file
+iproute
+iputils
+less
+man
+man-db
+man-pages
+nano
+openssh-clients
+passwd
+rootfiles
+subscription-manager
+sudo
+systemd
+tar
+vim
+wget
+yum
+yum-utils
+-firewalld
+-os-prober
 %end
 
 %pre
@@ -60,6 +66,9 @@ touch /tmp/NOSAVE_LOGS
 %end
 
 %post --log=/anaconda-post.log
+
+# set DNF infra variable to container for compatibility with CentOS
+echo 'container' > /etc/dnf/vars/infra
 
 # remove stuff we don't need that anaconda insists on
 # kernel needs to be removed by rpm, because of grubby
