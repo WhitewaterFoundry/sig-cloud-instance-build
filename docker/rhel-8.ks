@@ -1,5 +1,5 @@
 # Basic setup information
-install
+# install
 cdrom
 keyboard us
 rootpw --lock --iscrypted locked
@@ -14,7 +14,7 @@ lang en_US.UTF-8
 # Disk setup
 zerombr
 clearpart --all --initlabel
-autopart --fstype=ext4 --type=plain --nohome --noboot --noswap
+part / --size 1500 --fstype ext4
 
 #-*firmware
 #-firewalld-filesystem
