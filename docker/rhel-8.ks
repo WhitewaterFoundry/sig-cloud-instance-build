@@ -1,5 +1,5 @@
 # Basic setup information
-# install
+install
 cdrom
 keyboard us
 rootpw --lock --iscrypted locked
@@ -27,11 +27,12 @@ part / --size 1500 --fstype ext4
 #-teamd
 
 # Package setup
-%packages --nocore --instLangs=en
+%packages --nocore --ignoremissing --instLangs=en
 @^minimal-environment
 bash
 bash-completion
 bind-utils
+cracklib-dicts
 curl
 dnf
 dos2unix
@@ -39,19 +40,26 @@ file
 iproute
 iputils
 less
+libmodulemd
+libzstd
 man
 man-db
 man-pages
 nano
 openssh-clients
 passwd
+pciutils
 rootfiles
+rpm
+sed
 subscription-manager
 sudo
 systemd
 tar
 vim
+vim-enhanced
 wget
+which
 yum
 yum-utils
 -firewalld
@@ -70,10 +78,27 @@ touch /tmp/NOSAVE_LOGS
 # set DNF infra variable to container for compatibility with CentOS
 echo 'container' > /etc/dnf/vars/infra
 
+# copy some custom files into our build directory
+#BASE_URL="https://raw.githubusercontent.com/WhitewaterFoundry/pengwin-enterprise-rootfs-builds/master"
+#
+#sudo curl -L -f "${BASE_URL}/linux_files/wsl.conf" "${BUILDDIR}"/etc/wsl.conf
+#sudo mkdir "${BUILDDIR}"/etc/fonts
+#sudo curl -L -f "${BASE_URL}/linux_files/local.conf "${BUILDDIR}"/etc/fonts/local.conf
+#sudo curl -L -f "${BASE_URL}/linux_files/DB_CONFIG "${BUILDDIR}"/var/lib/rpm/
+#sudo curl -L -f "${BASE_URL}/linux_files/00-wle.sh "${BUILDDIR}"/etc/profile.d/
+#sudo curl -L -f "${BASE_URL}/linux_files/upgrade.sh "${BUILDDIR}"/usr/local/bin/upgrade.sh
+#sudo chmod +x "${BUILDDIR}"/usr/local/bin/upgrade.sh
+sudo ln -s /usr/local/bin/upgrade.sh /usr/local/bin/update.sh
+
 # remove stuff we don't need that anaconda insists on
 # kernel needs to be removed by rpm, because of grubby
 rpm -e kernel
 yum -y remove linux-firmware qemu-guest-agent
+
+#Add WSLU
+yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
+yum -y update
+
 yum clean all
 
 #clean up unused directories
