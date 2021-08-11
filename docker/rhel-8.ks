@@ -17,8 +17,8 @@ clearpart --all --initlabel
 part / --size 1500 --fstype ext4
 
 #-*firmware
-
 #-firewalld-filesystem
+
 #-os-prober
 #-gettext*
 #-GeoIP
@@ -63,9 +63,9 @@ wget
 which
 yum
 yum-utils
--*firmware
 -firewalld
 -os-prober
+-firewalld-filesystem
 %end
 
 %pre
