@@ -38,6 +38,7 @@ curl
 dnf
 dos2unix
 file
+glx-utils
 iproute
 iputils
 less
@@ -46,6 +47,8 @@ libzstd
 man
 man-db
 man-pages
+mesa-dri-drivers
+mesa-libGL
 nano
 openssh-clients
 passwd
@@ -64,8 +67,8 @@ which
 yum
 yum-utils
 -firewalld
--os-prober
 -firewalld-filesystem
+-os-prober
 %end
 
 %pre
@@ -131,9 +134,6 @@ echo "set show-all-if-unmodified on" >> /etc/skel/.inputrc
 
 #Fix ping
 chmod u+s /usr/bin/ping
-
-#Upgrade to the latest
-yum -y upgrade
 
 #Generate installtime file record
 /bin/date +%Y%m%d_%H%M > /etc/BUILDTIME
