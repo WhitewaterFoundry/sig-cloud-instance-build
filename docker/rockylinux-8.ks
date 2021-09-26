@@ -37,6 +37,7 @@ cracklib-dicts
 curl
 dnf
 dos2unix
+epel-release
 file
 glx-utils
 iproute
@@ -91,6 +92,7 @@ yum -y remove linux-firmware qemu-guest-agent
 #Add WSLU
 yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo
 yum -y update
+yum -y install wslu
 
 yum clean all
 
