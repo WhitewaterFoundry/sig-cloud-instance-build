@@ -83,11 +83,6 @@ touch /tmp/NOSAVE_LOGS
 # set DNF infra variable to container for compatibility with CentOS
 echo 'container' > /etc/dnf/vars/infra
 
-# remove stuff we don't need that anaconda insists on
-# kernel needs to be removed by rpm, because of grubby
-rpm -e kernel
-yum -y remove linux-firmware qemu-guest-agent
-
 #Add WWF repo
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
@@ -98,7 +93,13 @@ dnf versionlock add mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi
 
 #Add WSLU
 yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo
+
 yum -y update
+
+# remove stuff we don't need that anaconda insists on
+# kernel needs to be removed by rpm, because of grubby
+rpm -e kernel
+yum -y remove linux-firmware qemu-guest-agent
 
 yum clean all
 
