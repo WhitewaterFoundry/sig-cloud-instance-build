@@ -14,7 +14,7 @@ lang en_US.UTF-8
 # Disk setup
 zerombr
 clearpart --all --initlabel
-part / --size 1500 --fstype ext4
+part / --size 2000 --fstype ext4
 
 #-*firmware
 #-firewalld-filesystem
@@ -38,6 +38,7 @@ curl
 dnf
 dos2unix
 file
+glx-utils
 iproute
 iputils
 less
@@ -46,6 +47,8 @@ libzstd
 man
 man-db
 man-pages
+mesa-dri-drivers
+mesa-libGL
 nano
 openssh-clients
 passwd
@@ -64,8 +67,8 @@ which
 yum
 yum-utils
 -firewalld
--os-prober
 -firewalld-filesystem
+-os-prober
 %end
 
 %pre
@@ -80,14 +83,23 @@ touch /tmp/NOSAVE_LOGS
 # set DNF infra variable to container for compatibility with CentOS
 echo 'container' > /etc/dnf/vars/infra
 
+#Add WWF repo
+curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
+
+#Install WSL MESA
+dnf -y install 'dnf-command(versionlock)'
+dnf -y install --allowerasing --nogpgcheck mesa-dri-drivers-21.1.5-wsl.el8 mesa-libGL-21.1.5-wsl.el8
+dnf versionlock add mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi
+
+#Add WSLU
+yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo
+
+yum -y update
+
 # remove stuff we don't need that anaconda insists on
 # kernel needs to be removed by rpm, because of grubby
 rpm -e kernel
 yum -y remove linux-firmware qemu-guest-agent
-
-#Add WSLU
-yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo
-yum -y update
 
 yum clean all
 
