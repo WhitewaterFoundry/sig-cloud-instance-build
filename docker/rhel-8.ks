@@ -53,6 +53,7 @@ nano
 openssh-clients
 passwd
 pciutils
+python3-dnf-plugin-versionlock
 rootfiles
 rpm
 sed
@@ -87,7 +88,6 @@ echo 'container' > /etc/dnf/vars/infra
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
 #Install WSL MESA
-dnf -y install 'dnf-command(versionlock)'
 dnf -y install --allowerasing --nogpgcheck mesa-dri-drivers-21.1.5-wsl.el8 mesa-libGL-21.1.5-wsl.el8
 dnf versionlock add mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi
 
