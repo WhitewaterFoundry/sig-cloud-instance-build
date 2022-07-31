@@ -60,6 +60,7 @@ sed
 subscription-manager
 sudo
 systemd
+systemd-container
 tar
 vim
 vim-enhanced
