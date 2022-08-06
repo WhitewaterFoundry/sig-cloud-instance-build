@@ -14,44 +14,63 @@ lang en_US
 # Disk setup
 zerombr
 clearpart --all --initlabel
-part / --size 1500 --fstype ext4
+part / --size 2000 --fstype ext4
+
+#-*firmware
+#-firewalld-filesystem
+
+#-os-prober
+#-gettext*
+#-GeoIP
+#-bind-license
+#-freetype
+#-libteam
+#-teamd
 
 # Package setup
-%packages --nobase --nocore --instLangs=en
+%packages --nocore --ignoremissing --instLangs=en
+@^minimal-environment
 bash
 bash-completion
 bind-utils
 deltarpm
+cracklib-dicts
+curl
 dos2unix
+file
+glx-utils
 iproute
 iputils
 less
+libmodulemd
+libzstd
 man
 man-db
 man-pages
+mesa-dri-drivers
+mesa-libGL
+nano
 openssh-clients
 passwd
+pciutils
 rootfiles
+rpm
+sed
 subscription-manager
 sudo
 systemd
+systemd-container
 tar
 vim
+vim-enhanced
 wget
+which
 yum
 yum-plugin-ovl
 yum-utils
--*firmware
--GeoIP
--bind-license
+-firewalld
 -firewalld-filesystem
--freetype
--gettext*
--kernel*
--libteam
 -os-prober
--teamd
-
 %end
 
 %pre
@@ -114,9 +133,6 @@ echo "set show-all-if-unmodified on" >> /etc/skel/.inputrc
 
 #Fix ping
 chmod u+s /usr/bin/ping
-
-#Upgrade to the latest
-yum -y upgrade
 
 #Generate installtime file record
 /bin/date +%Y%m%d_%H%M > /etc/BUILDTIME
