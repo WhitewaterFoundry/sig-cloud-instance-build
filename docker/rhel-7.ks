@@ -67,6 +67,7 @@ wget
 which
 yum
 yum-plugin-ovl
+yum-plugin-versionlock
 yum-utils
 -firewalld
 -firewalld-filesystem
