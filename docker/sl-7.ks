@@ -85,7 +85,7 @@ rpm -e kernel
 yum -y remove bind-libs bind-libs-lite dhclient dhcp-common dhcp-libs \
   dracut-network e2fsprogs e2fsprogs-libs ebtables ethtool file \
   firewalld freetype gettext gettext-libs grub2 grub2-tools \
-  grubby initscripts iproute iptables kexec-tools libcroco libgomp \
+  grubby initscripts iptables kexec-tools libcroco libgomp \
   libmnl libnetfilter_conntrack libnfnetlink libselinux-python lzo \
   libunistring os-prober python-decorator python-slip python-slip-dbus \
   snappy sysvinit-tools linux-firmware GeoIP firewalld-filesystem \
