@@ -145,6 +145,9 @@ echo "set show-all-if-unmodified on" >> /etc/skel/.inputrc
 #Fix ping
 chmod u+s /usr/bin/ping
 
+#Upgrade to the latest
+dnf -y upgrade
+
 #Generate installtime file record
 /bin/date +%Y%m%d_%H%M > /etc/BUILDTIME
 
