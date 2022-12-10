@@ -1,3 +1,4 @@
+# bashsupport disable=BP5007
 # Basic setup information
 install
 cdrom
@@ -89,7 +90,7 @@ echo 'container' > /etc/dnf/vars/infra
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
 #Install WSL MESA
-dnf -y install --allowerasing --nogpgcheck mesa-dri-drivers-21.3.4-wsl.el8 mesa-libGL-21.3.4-wsl.el8
+dnf -y install --allowerasing --nogpgcheck mesa-dri-drivers-22.1.5-wsl.el8 mesa-libGL-22.1.5-wsl.el8
 dnf versionlock add mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi
 
 #Add WSLU
