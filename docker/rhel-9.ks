@@ -1,3 +1,4 @@
+# bashsupport disable=BP5007
 # Basic setup information
 install
 cdrom
@@ -60,6 +61,7 @@ sed
 subscription-manager
 sudo
 systemd
+systemd-container
 tar
 vim
 vim-enhanced
@@ -88,8 +90,8 @@ echo 'container' > /etc/dnf/vars/infra
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
 #Install WSL MESA
-#dnf -y install --allowerasing --nogpgcheck mesa-dri-drivers-21.1.5-wsl.el8 mesa-libGL-21.1.5-wsl.el8
-#dnf versionlock add mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi
+dnf -y install --allowerasing --nogpgcheck mesa-dri-drivers-22.1.5-wsl.el8 mesa-libGL-22.1.5-wsl.el8
+dnf versionlock add mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi
 
 #Add WSLU
 yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo
