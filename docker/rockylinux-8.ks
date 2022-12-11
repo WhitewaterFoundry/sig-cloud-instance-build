@@ -50,6 +50,7 @@ man-db
 man-pages
 mesa-dri-drivers
 mesa-libGL
+mesa-vulkan-drivers
 nano
 openssh-clients
 passwd
