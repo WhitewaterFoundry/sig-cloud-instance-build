@@ -36,6 +36,7 @@ bash-completion
 bind-utils
 cracklib-dicts
 curl
+dbus-tools
 dnf
 dos2unix
 file
