@@ -1,6 +1,5 @@
 # bashsupport disable=BP5007
 # Basic setup information
-install
 cdrom
 keyboard us
 rootpw --lock --iscrypted locked
