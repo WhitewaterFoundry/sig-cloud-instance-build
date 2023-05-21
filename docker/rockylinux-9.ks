@@ -52,6 +52,7 @@ mesa-dri-drivers
 mesa-libGL
 mesa-vulkan-drivers
 nano
+ncurses
 openssh-clients
 passwd
 pciutils
@@ -64,6 +65,7 @@ sudo
 systemd
 systemd-container
 tar
+vim-minimal
 vim
 vim-enhanced
 wget
