@@ -14,7 +14,7 @@ lang en_US.UTF-8
 # Disk setup
 zerombr
 clearpart --all --initlabel
-part / --size 2000 --fstype ext4
+part / --size 3000 --fstype ext4
 
 #-*firmware
 #-firewalld-filesystem
