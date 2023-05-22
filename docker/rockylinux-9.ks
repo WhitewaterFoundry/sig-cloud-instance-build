@@ -15,6 +15,7 @@ lang en_US.UTF-8
 zerombr
 clearpart --all --initlabel
 part / --size 3000 --fstype ext4
+part /boot/efi
 
 #-*firmware
 #-firewalld-filesystem
