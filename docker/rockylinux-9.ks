@@ -1,5 +1,6 @@
 # bashsupport disable=BP5007
 # Basic setup information
+install
 cdrom
 keyboard us
 rootpw --lock --iscrypted locked
@@ -14,8 +15,7 @@ lang en_US.UTF-8
 # Disk setup
 zerombr
 clearpart --all --initlabel
-part / --size 5000 --fstype ext4 --grow
-part /boot/efi
+part / --size 2000 --fstype ext4
 
 #-*firmware
 #-firewalld-filesystem
