@@ -43,13 +43,19 @@ glx-utils
 iproute
 iputils
 less
+libglvnd-egl
 libmodulemd
+libwayland-server
 libzstd
 man
 man-db
 man-pages
 mesa-dri-drivers
+mesa-libEGL
 mesa-libGL
+mesa-libgbm
+mesa-libxatracker
+mesa-vdpau-drivers
 mesa-vulkan-drivers
 nano
 openssh-clients
@@ -96,7 +102,6 @@ declare -a target_version=('8' '9')
 declare -i i=0
 
 dnf -y install --allowerasing --nogpgcheck mesa-dri-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-vdpau-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libEGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-libgbm-"${mesa_version[i]}".el"${target_version[i]}" mesa-libxatracker-"${mesa_version[i]}".el"${target_version[i]}" mesa-vulkan-drivers-"${mesa_version[i]}".el"${target_version[i]}" glx-utils
-dnf -y install libva-utils
 dnf versionlock add mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi mesa-vdpau-drivers mesa-libEGL mesa-libgbm mesa-libxatracker mesa-vulkan-drivers
 
 /usr/sbin/groupadd -g 44 wsl-video
