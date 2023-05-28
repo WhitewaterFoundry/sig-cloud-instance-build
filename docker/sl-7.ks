@@ -1,3 +1,4 @@
+# bashsupport disable=BP5007
 # Basic setup information
 url --url="http://ftp.scientificlinux.org/linux/scientific/7x/x86_64/os/"
 install
@@ -77,6 +78,8 @@ touch /tmp/NOSAVE_LOGS
 %end
 
 %post --log=/anaconda-post.log
+
+/usr/sbin/groupadd -g 44 wsl-video
 
 # remove stuff we don't need that anaconda insists on
 # kernel needs to be removed by rpm, because of grubby
