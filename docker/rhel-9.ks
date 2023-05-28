@@ -26,6 +26,7 @@ part / --size 3000 --fstype ext4 --grow
 #-freetype
 #-libteam
 #-teamd
+#-os-prober
 
 # Package setup
 %packages --nocore --ignoremissing --instLangs=en
@@ -79,7 +80,6 @@ yum
 yum-utils
 -firewalld
 -firewalld-filesystem
-#-os-prober
 %end
 
 %pre
