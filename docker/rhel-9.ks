@@ -8,7 +8,7 @@ selinux --enforcing
 firewall --disabled
 network --bootproto=dhcp --device=link --activate --onboot=on --noipv6
 shutdown
-bootloader --d
+bootloader --location=none
 lang en_US.UTF-8
 
 # Disk setup
