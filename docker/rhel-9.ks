@@ -43,13 +43,19 @@ glx-utils
 iproute
 iputils
 less
+libglvnd-egl
 libmodulemd
+libwayland-server
 libzstd
 man
 man-db
 man-pages
 mesa-dri-drivers
+mesa-libEGL
 mesa-libGL
+mesa-libgbm
+mesa-libxatracker
+mesa-vdpau-drivers
 mesa-vulkan-drivers
 nano
 ncurses
@@ -93,12 +99,11 @@ echo 'container' > /etc/dnf/vars/infra
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
 #Install WSL MESA
-
-declare -a mesa_version=('22.3.0-wsl2' '22.3.0-wsl2')
+declare -a mesa_version=('22.3.0-wsl3' '22.3.0-wsl2')
 declare -a target_version=('8' '9')
 declare -i i=1
 
-dnf -y install --allowerasing --nogpgcheck mesa-dri-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-vdpau-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libEGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-libgbm-"${mesa_version[i]}".el"${target_version[i]}" mesa-libxatracker-"${mesa_version[i]}".el"${target_version[i]}" mesa-vulkan-drivers-"${mesa_version[i]}".el"${target_version[i]}" glx-utils libva-utils
+dnf -y install --allowerasing --nogpgcheck mesa-dri-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-vdpau-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libEGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-libgbm-"${mesa_version[i]}".el"${target_version[i]}" mesa-libxatracker-"${mesa_version[i]}".el"${target_version[i]}" mesa-vulkan-drivers-"${mesa_version[i]}".el"${target_version[i]}" glx-utils
 dnf versionlock add mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi mesa-vdpau-drivers mesa-libEGL mesa-libgbm mesa-libxatracker mesa-vulkan-drivers
 
 /usr/sbin/groupadd -g 44 wsl-video
