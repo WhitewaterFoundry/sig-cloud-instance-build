@@ -83,6 +83,8 @@ touch /tmp/NOSAVE_LOGS
 
 %post --log=/anaconda-post.log
 
+/usr/sbin/groupadd -g 44 wsl-video
+
 # remove stuff we don't need that anaconda insists on
 # kernel needs to be removed by rpm, because of grubby
 rpm -e kernel
