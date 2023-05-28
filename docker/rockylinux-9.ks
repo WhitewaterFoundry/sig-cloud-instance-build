@@ -1,15 +1,14 @@
 # bashsupport disable=BP5007
 # Basic setup information
-install
 cdrom
 keyboard us
 rootpw --lock --iscrypted locked
 timezone --isUtc --nontp UTC
 selinux --enforcing
 firewall --disabled
-network --bootproto=dhcp --device=link --activate --onboot=on
+network --bootproto=dhcp --device=link --activate --onboot=on --noipv6
 shutdown
-bootloader
+bootloader --location=none
 lang en_US.UTF-8
 
 # Disk setup
@@ -27,6 +26,7 @@ part / --size 3000 --fstype ext4 --grow
 #-freetype
 #-libteam
 #-teamd
+#-os-prober
 
 # Package setup
 %packages --nocore --ignoremissing --instLangs=en
@@ -44,13 +44,18 @@ glx-utils
 iproute
 iputils
 less
+libglvnd-egl
 libmodulemd
+libwayland-server
 libzstd
 man
 man-db
 man-pages
 mesa-dri-drivers
+mesa-libEGL
 mesa-libGL
+mesa-libgbm
+mesa-libxatracker
 mesa-vulkan-drivers
 nano
 ncurses
@@ -75,7 +80,6 @@ yum
 yum-utils
 -firewalld
 -firewalld-filesystem
--os-prober
 %end
 
 %pre
@@ -94,15 +98,14 @@ echo 'container' > /etc/dnf/vars/infra
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
 #Install WSL MESA
+declare -a mesa_version=('22.3.0-wsl3' '22.3.0-wsl2')
+declare -a target_version=('8' '9')
+declare -i i=1
 
-#declare -a mesa_version=('22.3.0-wsl2' '22.3.0-wsl2')
-#declare -a target_version=('8' '9')
-#declare -i i=1
+dnf -y install --allowerasing --nogpgcheck mesa-dri-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-vdpau-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libEGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-libgbm-"${mesa_version[i]}".el"${target_version[i]}" mesa-libxatracker-"${mesa_version[i]}".el"${target_version[i]}" mesa-vulkan-drivers-"${mesa_version[i]}".el"${target_version[i]}" glx-utils
+dnf versionlock add mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi mesa-vdpau-drivers mesa-libEGL mesa-libgbm mesa-libxatracker mesa-vulkan-drivers
 
-#dnf -y install --allowerasing --nogpgcheck mesa-dri-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-vdpau-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libEGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-libgbm-"${mesa_version[i]}".el"${target_version[i]}" mesa-libxatracker-"${mesa_version[i]}".el"${target_version[i]}" mesa-vulkan-drivers-"${mesa_version[i]}".el"${target_version[i]}" glx-utils libva-utils
-#dnf versionlock add mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi mesa-vdpau-drivers mesa-libEGL mesa-libgbm mesa-libxatracker mesa-vulkan-drivers
-
-#/usr/sbin/groupadd -g 44 wsl-video
+/usr/sbin/groupadd -g 44 wsl-video
 
 #Add WSLU
 yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo
