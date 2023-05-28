@@ -6,7 +6,7 @@ rootpw --lock --iscrypted locked
 timezone --isUtc --nontp UTC
 selinux --enforcing
 firewall --disabled
-network --bootproto=dhcp --device=link --activate --onboot=on
+network --no-activate #--bootproto=dhcp --device=link --activate --onboot=on
 shutdown
 bootloader --location=partition
 lang en_US.UTF-8
