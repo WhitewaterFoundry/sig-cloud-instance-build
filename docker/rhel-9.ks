@@ -8,7 +8,7 @@ selinux --enforcing
 firewall --disabled
 network --bootproto=dhcp --device=link --activate --onboot=on --noipv6
 shutdown
-bootloader --location=mbr
+bootloader --d
 lang en_US.UTF-8
 
 # Disk setup
@@ -79,7 +79,7 @@ yum
 yum-utils
 -firewalld
 -firewalld-filesystem
--os-prober
+#-os-prober
 %end
 
 %pre
