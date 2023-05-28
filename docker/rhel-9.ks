@@ -6,9 +6,9 @@ rootpw --lock --iscrypted locked
 timezone --isUtc --nontp UTC
 selinux --enforcing
 firewall --disabled
-network --no-activate #--bootproto=dhcp --device=link --activate --onboot=on
+network --bootproto=dhcp --device=link --activate --onboot=on --noipv6
 shutdown
-bootloader --location=partition
+bootloader --location=mbr
 lang en_US.UTF-8
 
 # Disk setup
