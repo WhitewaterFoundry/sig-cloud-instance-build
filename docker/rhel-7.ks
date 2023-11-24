@@ -32,11 +32,14 @@ part / --size 2000 --fstype ext4
 @^minimal-environment
 bash
 bash-completion
+bc
 bind-utils
 deltarpm
 cracklib-dicts
 curl
+desktop-file-utils
 dos2unix
+emacs-filesystem
 file
 glx-utils
 iproute
@@ -93,6 +96,7 @@ yum -y remove linux-firmware qemu-guest-agent
 #Add WSLU
 yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
 yum -y update
+yum -y install wslu
 
 yum clean all
 

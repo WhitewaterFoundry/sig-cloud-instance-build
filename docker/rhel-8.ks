@@ -32,11 +32,14 @@ part / --size 2000 --fstype ext4
 @^minimal-environment
 bash
 bash-completion
+bc
 bind-utils
 cracklib-dicts
 curl
+desktop-file-utils
 dnf
 dos2unix
+emacs-filesystem
 file
 glx-utils
 iproute
@@ -109,14 +112,15 @@ dnf versionlock add llvm-libs mesa-dri-drivers mesa-libGL mesa-filesystem mesa-l
 #Add WSLU
 yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo
 
-yum -y update
+dnf -y update
+dnf -y install wslu
 
 # remove stuff we don't need that anaconda insists on
 # kernel needs to be removed by rpm, because of grubby
 rpm -e kernel
-yum -y remove linux-firmware qemu-guest-agent
+dnf -y remove linux-firmware qemu-guest-agent
 
-yum clean all
+dnf clean all
 
 #clean up unused directories
 rm -rf /boot
