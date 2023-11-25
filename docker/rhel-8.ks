@@ -90,7 +90,7 @@ yum-utils
 touch /tmp/NOSAVE_LOGS
 %end
 
-%post --log=/anaconda-post.log
+%post --log=/anaconda-post.log --interpreter=/usr/bin/bash
 
 # set DNF infra variable to container for compatibility with CentOS
 echo 'container' > /etc/dnf/vars/infra
