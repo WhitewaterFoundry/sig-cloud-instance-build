@@ -56,6 +56,7 @@ nano
 openssh-clients
 passwd
 pciutils
+psmisc
 rootfiles
 rpm
 sed
