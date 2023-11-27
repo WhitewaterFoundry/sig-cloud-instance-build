@@ -33,12 +33,15 @@ part / --size 3000 --fstype ext4 --grow
 @^minimal-environment
 bash
 bash-completion
+bc
 bind-utils
 cracklib-dicts
 curl
 dbus-tools
+desktop-file-utils
 dnf
 dos2unix
+emacs-filesystem
 file
 glx-utils
 iproute
@@ -89,7 +92,7 @@ yum-utils
 touch /tmp/NOSAVE_LOGS
 %end
 
-%post --log=/anaconda-post.log
+%post --log=/anaconda-post.log --interpreter=/usr/bin/bash
 
 # set DNF infra variable to container for compatibility with CentOS
 echo 'container' > /etc/dnf/vars/infra
@@ -98,26 +101,28 @@ echo 'container' > /etc/dnf/vars/infra
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
 #Install WSL MESA
-declare -a mesa_version=('22.3.0-wsl3' '22.3.0-wsl2')
+declare -a mesa_version=('22.3.0-wsl3' '23.1.4-wsl')
+declare -a llvm_version=('15.0.7' '16.0.6')
 declare -a target_version=('8' '9')
 declare -i i=1
 
-dnf -y install --allowerasing --nogpgcheck mesa-dri-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-vdpau-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libEGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-libgbm-"${mesa_version[i]}".el"${target_version[i]}" mesa-libxatracker-"${mesa_version[i]}".el"${target_version[i]}" mesa-vulkan-drivers-"${mesa_version[i]}".el"${target_version[i]}" glx-utils
-dnf versionlock add mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi mesa-vdpau-drivers mesa-libEGL mesa-libgbm mesa-libxatracker mesa-vulkan-drivers
+dnf -y install --allowerasing --nogpgcheck llvm-libs-"${llvm_version[i]}" mesa-dri-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-vdpau-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libEGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-libgbm-"${mesa_version[i]}".el"${target_version[i]}" mesa-libxatracker-"${mesa_version[i]}".el"${target_version[i]}" mesa-vulkan-drivers-"${mesa_version[i]}".el"${target_version[i]}" glx-utils
+dnf versionlock add llvm-libs mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi mesa-vdpau-drivers mesa-libEGL mesa-libgbm mesa-libxatracker mesa-vulkan-drivers
 
 /usr/sbin/groupadd -g 44 wsl-video
 
 #Add WSLU
 yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/CentOS_8/home:wslutilities.repo
 
-yum -y update
+dnf -y update
+dnf -y install wslu
 
 # remove stuff we don't need that anaconda insists on
 # kernel needs to be removed by rpm, because of grubby
 rpm -e kernel
-yum -y remove linux-firmware qemu-guest-agent
+dnf -y remove linux-firmware qemu-guest-agent
 
-yum clean all
+dnf clean all
 
 #clean up unused directories
 rm -rf /boot

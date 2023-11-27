@@ -26,16 +26,22 @@ part / --size 3000 --fstype ext4
 @^minimal-environment
 bash
 bash-completion
+bc
 bind-utils
 centos-release
 deltarpm
+cracklib-dicts
 curl
+desktop-file-utils
 dos2unix
+emacs-filesystem
 file
 glx-utils
 iproute
 iputils
 less
+libmodulemd
+libzstd
 man
 man-db
 man-pages
@@ -44,6 +50,8 @@ mesa-libGL
 nano
 openssh-clients
 passwd
+pciutils
+psmisc
 rootfiles
 rpm
 sed
@@ -97,6 +105,7 @@ yum -y remove bind-libs bind-libs-lite dhclient dhcp-common dhcp-libs \
 #Add WSLU
 yum-config-manager --add-repo https://download.opensuse.org/repositories/home:/wslutilities/ScientificLinux_7/home:wslutilities.repo
 yum -y update
+yum -y install wslu
 
 yum clean all
 
