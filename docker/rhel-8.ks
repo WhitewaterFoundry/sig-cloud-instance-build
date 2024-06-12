@@ -14,7 +14,7 @@ lang en_US.UTF-8
 # Disk setup
 zerombr
 clearpart --all --initlabel
-part / --size 2000 --fstype ext4
+part / --size 3000 --fstype ext4 --grow
 
 #-*firmware
 #-firewalld-filesystem
@@ -99,8 +99,8 @@ echo 'container' > /etc/dnf/vars/infra
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
 #Install WSL MESA
-declare -a mesa_version=('22.3.0-wsl3' '23.1.4-wsl')
-declare -a llvm_version=('15.0.7' '16.0.6')
+declare -a mesa_version=('22.3.0-wsl3' '23.3.3-wsl')
+declare -a llvm_version=('15.0.7' '17.0.6')
 declare -a target_version=('8' '9')
 declare -i i=0
 
