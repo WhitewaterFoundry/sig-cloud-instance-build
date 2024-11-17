@@ -47,6 +47,7 @@ glx-utils
 iproute
 iputils
 less
+llvm-libs-17.0.6
 libglvnd-egl
 libmodulemd
 libwayland-server
