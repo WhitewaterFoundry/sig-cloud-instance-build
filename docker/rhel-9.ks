@@ -163,8 +163,19 @@ echo "set bell-style none" >> /etc/skel/.inputrc
 echo "set show-all-if-ambiguous on" >> /etc/skel/.inputrc
 echo "set show-all-if-unmodified on" >> /etc/skel/.inputrc
 
-#Fix ping
+# Fix ping
 chmod u+s /usr/bin/ping
+
+# Masking conflicting services"
+ln -sf /dev/null /etc/systemd/system/systemd-resolved.service
+ln -sf /dev/null /etc/systemd/system/systemd-networkd.service
+ln -sf /dev/null /etc/systemd/system/NetworkManager.service
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup.service
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-clean.service
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-clean.timer
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup-dev-early.service
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup-dev.service
+ln -sf /dev/null /etc/systemd/system/tmp.mount
 
 #Generate installtime file record
 /bin/date +%Y%m%d_%H%M > /etc/BUILDTIME
