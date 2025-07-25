@@ -26,7 +26,6 @@ part / --size 3000 --fstype ext4 --grow
 #-freetype
 #-libteam
 #-teamd
-#-os-prober
 
 # Package setup
 %packages --nocore --ignoremissing --instLangs=en

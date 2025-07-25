@@ -36,6 +36,7 @@ bc
 bind-utils
 cracklib-dicts
 curl
+dbus-tools
 desktop-file-utils
 dnf
 dos2unix
@@ -45,6 +46,7 @@ glx-utils
 iproute
 iputils
 less
+llvm-libs-17.0.6
 libglvnd-egl
 libmodulemd
 libwayland-server
@@ -60,6 +62,7 @@ mesa-libxatracker
 mesa-vdpau-drivers
 mesa-vulkan-drivers
 nano
+ncurses
 openssh-clients
 passwd
 pciutils
@@ -72,6 +75,7 @@ sudo
 systemd
 systemd-container
 tar
+vim-minimal
 vim
 vim-enhanced
 wget
@@ -80,7 +84,6 @@ yum
 yum-utils
 -firewalld
 -firewalld-filesystem
--os-prober
 %end
 
 %pre
@@ -99,8 +102,8 @@ echo 'container' > /etc/dnf/vars/infra
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
 #Install WSL MESA
-declare -a mesa_version=('23.1.4-2_wsl' '23.3.3-wsl')
-declare -a llvm_version=('17.0.6' '17.0.6')
+declare -a mesa_version=('23.1.4-2_wsl' '24.2.8-2_wsl')
+declare -a llvm_version=('17.0.6' '19.1.7')
 declare -a target_version=('8' '9')
 declare -i i=0
 
@@ -162,6 +165,17 @@ echo "set show-all-if-unmodified on" >> /etc/skel/.inputrc
 
 #Fix ping
 chmod u+s /usr/bin/ping
+
+# Masking conflicting services"
+ln -sf /dev/null /etc/systemd/system/systemd-resolved.service
+ln -sf /dev/null /etc/systemd/system/systemd-networkd.service
+ln -sf /dev/null /etc/systemd/system/NetworkManager.service
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup.service
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-clean.service
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-clean.timer
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup-dev-early.service
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup-dev.service
+ln -sf /dev/null /etc/systemd/system/tmp.mount
 
 #Generate installtime file record
 /bin/date +%Y%m%d_%H%M > /etc/BUILDTIME

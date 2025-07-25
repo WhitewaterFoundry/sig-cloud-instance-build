@@ -26,7 +26,6 @@ part / --size 3000 --fstype ext4 --grow
 #-freetype
 #-libteam
 #-teamd
-#-os-prober
 
 # Package setup
 %packages --nocore --ignoremissing --instLangs=en
@@ -47,6 +46,7 @@ glx-utils
 iproute
 iputils
 less
+llvm-libs-19.1.7
 libglvnd-egl
 libmodulemd
 libwayland-server
@@ -101,8 +101,8 @@ echo 'container' > /etc/dnf/vars/infra
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
 #Install WSL MESA
-declare -a mesa_version=('23.1.4-2_wsl' '23.3.3-wsl')
-declare -a llvm_version=('17.0.6' '17.0.6')
+declare -a mesa_version=('23.1.4-2_wsl' '24.2.8-2_wsl')
+declare -a llvm_version=('17.0.6' '19.1.7')
 declare -a target_version=('8' '9')
 declare -i i=1
 
@@ -164,6 +164,17 @@ echo "set show-all-if-unmodified on" >> /etc/skel/.inputrc
 
 #Fix ping
 chmod u+s /usr/bin/ping
+
+# Masking conflicting services"
+ln -sf /dev/null /etc/systemd/system/systemd-resolved.service
+ln -sf /dev/null /etc/systemd/system/systemd-networkd.service
+ln -sf /dev/null /etc/systemd/system/NetworkManager.service
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup.service
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-clean.service
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-clean.timer
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup-dev-early.service
+ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup-dev.service
+ln -sf /dev/null /etc/systemd/system/tmp.mount
 
 #Upgrade to the latest
 dnf -y upgrade
