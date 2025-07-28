@@ -38,6 +38,7 @@ cracklib-dicts
 curl
 dbus-tools
 desktop-file-utils
+dialog
 dnf
 dos2unix
 emacs-filesystem
@@ -101,7 +102,7 @@ echo 'container' > /etc/dnf/vars/infra
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
 #Install WSL MESA
-declare -a mesa_version=('23.1.4-2_wsl' '24.2.8-2_wsl')
+declare -a mesa_version=('23.1.4-2_wsl' '24.2.8-2_wsl_2')
 declare -a llvm_version=('17.0.6' '19.1.7')
 declare -a target_version=('8' '9')
 declare -i i=1
@@ -168,14 +169,14 @@ chmod u+s /usr/bin/ping
 # Masking conflicting services"
 ln -sf /dev/null /etc/systemd/system/systemd-resolved.service
 ln -sf /dev/null /etc/systemd/system/systemd-networkd.service
-ln -sf /dev/null /etc/systemd/system/NetworkManager.service
-ln -sf /dev/null /etc/systemd/system/NetworkManager-wait-online.service
 ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup.service
 ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-clean.service
 ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-clean.timer
 ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup-dev-early.service
 ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup-dev.service
 ln -sf /dev/null /etc/systemd/system/tmp.mount
+ln -sf /dev/null /etc/systemd/system/NetworkManager.service
+ln -sf /dev/null /etc/systemd/system/NetworkManager-wait-online.service
 
 #Upgrade to the latest
 dnf -y upgrade
