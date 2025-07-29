@@ -38,6 +38,7 @@ cracklib-dicts
 curl
 dbus-tools
 desktop-file-utils
+dialog
 dnf
 dos2unix
 emacs-filesystem
@@ -49,6 +50,7 @@ less
 llvm-libs-17.0.6
 libglvnd-egl
 libmodulemd
+libva
 libwayland-server
 libzstd
 man
@@ -102,7 +104,7 @@ echo 'container' > /etc/dnf/vars/infra
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
 #Install WSL MESA
-declare -a mesa_version=('23.1.4-2_wsl' '24.2.8-2_wsl')
+declare -a mesa_version=('23.1.4-2_wsl' '24.2.8-2_wsl_2')
 declare -a llvm_version=('17.0.6' '19.1.7')
 declare -a target_version=('8' '9')
 declare -i i=0

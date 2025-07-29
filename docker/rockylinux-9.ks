@@ -50,6 +50,7 @@ less
 llvm-libs-19.1.7
 libglvnd-egl
 libmodulemd
+libva
 libwayland-server
 libzstd
 man
@@ -169,14 +170,14 @@ chmod u+s /usr/bin/ping
 # Masking conflicting services"
 ln -sf /dev/null /etc/systemd/system/systemd-resolved.service
 ln -sf /dev/null /etc/systemd/system/systemd-networkd.service
+ln -sf /dev/null /etc/systemd/system/NetworkManager.service
+ln -sf /dev/null /etc/systemd/system/NetworkManager-wait-online.service
 ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup.service
 ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-clean.service
 ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-clean.timer
 ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup-dev-early.service
 ln -sf /dev/null /etc/systemd/system/systemd-tmpfiles-setup-dev.service
 ln -sf /dev/null /etc/systemd/system/tmp.mount
-ln -sf /dev/null /etc/systemd/system/NetworkManager.service
-ln -sf /dev/null /etc/systemd/system/NetworkManager-wait-online.service
 
 #Upgrade to the latest
 dnf -y upgrade

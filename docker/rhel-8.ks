@@ -38,6 +38,7 @@ cracklib-dicts
 curl
 dbus-tools
 desktop-file-utils
+dialog
 dnf
 dos2unix
 emacs-filesystem
@@ -49,6 +50,7 @@ less
 llvm-libs-17.0.6
 libglvnd-egl
 libmodulemd
+libva
 libwayland-server
 libzstd
 man
