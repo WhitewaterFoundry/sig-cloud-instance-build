@@ -47,7 +47,7 @@ glx-utils
 iproute
 iputils
 less
-llvm-libs-19.1.7
+llvm-libs-20.1.8
 libglvnd-egl
 libmodulemd
 libva
@@ -103,8 +103,8 @@ echo 'container' > /etc/dnf/vars/infra
 curl -s https://packagecloud.io/install/repositories/whitewaterfoundry/pengwin-enterprise/script.rpm.sh | bash
 
 #Install WSL MESA
-declare -a mesa_version=('23.1.4-2_wsl' '24.2.8-2_wsl_2')
-declare -a llvm_version=('17.0.6' '19.1.7')
+declare -a mesa_version=('23.1.4-2_wsl' '25.0.7-3_wsl')
+declare -a llvm_version=('17.0.6' '20.1.8')
 declare -a target_version=('8' '9')
 declare -i i=1
 
