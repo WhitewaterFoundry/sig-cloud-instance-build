@@ -110,7 +110,8 @@ declare -i i=1
 
 dnf -y install --allowerasing --nogpgcheck llvm-libs-"${llvm_version[i]}" mesa-dri-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-vdpau-drivers-"${mesa_version[i]}".el"${target_version[i]}" mesa-libEGL-"${mesa_version[i]}".el"${target_version[i]}" mesa-libgbm-"${mesa_version[i]}".el"${target_version[i]}" mesa-vulkan-drivers-"${mesa_version[i]}".el"${target_version[i]}" glx-utils
 dnf -y install --allowerasing --nogpgcheck mesa-libxatracker-"${mesa_version[i]}".el"${target_version[i]}"
-dnf versionlock add llvm-libs mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi mesa-vdpau-drivers mesa-libEGL mesa-libgbm mesa-vulkan-drivers
+dnf -y install --allowerasing --nogpgcheck mesa-va-drivers-"${mesa_version[i]}".el"${target_version[i]}"
+dnf versionlock add llvm-libs mesa-dri-drivers mesa-libGL mesa-filesystem mesa-libglapi mesa-vdpau-drivers mesa-va-drivers mesa-libEGL mesa-libgbm mesa-vulkan-drivers
 
 /usr/sbin/groupadd -g 44 wsl-video
 
